@@ -56,6 +56,30 @@ router.get("/train", function (req, res) {
     });
 });
 
+router.get("/train/empty", function (req, res) {
+    fittraker.selectAll(function (data) {
+        let hbsObject = {
+            burger: data,
+            title: 'Train',
+            style: 'style-train.css'
+        };
+        console.log(hbsObject);
+        res.render("trainEmpty", hbsObject); //hbsObject is an obj containing one key "burger" which contains a list of objects
+    });
+});
+
+router.get("/discover", function (req, res) {
+    fittraker.selectAll(function (data) {
+        let hbsObject = {
+            burger: data,
+            title: 'Train',
+            style: 'style-train.css'
+        };
+        console.log(hbsObject);
+        res.render("discover", hbsObject); //hbsObject is an obj containing one key "burger" which contains a list of objects
+    });
+});
+
 router.post("/api/fittrakers", function (req, res) {
     console.log(req.body);
     fittraker.insertOne([
