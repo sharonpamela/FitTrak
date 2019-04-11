@@ -2,6 +2,9 @@ body {
     font-family: Roboto, Georgia, 'Times New Roman', Times, serif;
     color: white;
     background: black;
+    background: url(../img/loggedin.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 a {
@@ -47,14 +50,16 @@ a {
     grid-row: 1 / 7;
     align-self: center;
     text-align: center;
-    background: url(../img/loggedin.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    /* background: url(../img/loggedin.jpg); */
+    /* background-repeat: no-repeat;
+    background-size: cover; */
+    background: rgba(6, 6, 6, 0.45);
+    border-radius: 15px;
     margin: 0;
-	padding: 5%;
-	border: 0;
-
+    padding: 5%;
+    border: 0;
 }
+
 .whiteTransButton {
     background-color: transparent;
     color: white;

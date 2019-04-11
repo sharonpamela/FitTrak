@@ -49,6 +49,42 @@ var orm = {
       cb(result);
     });
   },
+  selectColumns: function(table, cols, condition, cb) {
+
+    var queryString = "SELECT " + cols.toString(); 
+    queryString += " FROM " + table;
+    queryString += " WHERE " ;
+    queryString += condition;
+
+    console.log(queryString);
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });
+  },
+
+  selectFirstInstance:function(table, cols, condition, orderBy, cb) {
+
+    var queryString = "SELECT " + cols.toString(); 
+    queryString += " FROM " + table;
+    queryString += " WHERE " ;
+    queryString += condition;
+    queryString += " ORDER BY ";
+    queryString += orderBy
+    queryString += " LIMIT 1";
+
+    console.log(queryString);
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+      cb(result);
+    });
+  },
+
+
   insertOne: function(table, cols, vals, cb) {
     var queryString = "INSERT INTO " + table;
 
@@ -85,7 +121,7 @@ var orm = {
       cb(result);
     });
   },
-  delete: function(table, condition, cb) {
+  deleteOne: function(table, condition, cb) {
     var queryString = "DELETE FROM " + table;
     queryString += " WHERE ";
     queryString += condition;

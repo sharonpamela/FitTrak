@@ -1,29 +1,29 @@
 // Import the ORM to create functions that will interact with the database.
 let orm = require("../config/orm.js");
 
-let fittraker = {
+let fitplan_day_exercise_set = {
   selectAll: function(cb) {
-    orm.selectAll("users", function(res) {
+    orm.selectAll("fitplan_day_exercise_sets", function(res) {
       cb(res);
     });
   },
   // The variables cols and vals are arrays.
   insertOne: function(cols, vals, cb) {
-    orm.insertOne("users", cols, vals, function(res) {
+    orm.insertOne("fitplan_day_exercise_sets", cols, vals, function(res) {
       cb(res);
     });
   },
   updateOne: function(objColVals, condition, cb) {
-    orm.updateOne("users", objColVals, condition, function(res) {
+    orm.updateOne("fitplan_day_exercise_sets", objColVals, condition, function(res) {
       cb(res);
     });
   },
-  delete: function(condition, cb) {
-    orm.delete("users", condition, function(res) {
+  deleteOne: function(condition, cb) {
+    orm.deleteOne("fitplan_day_exercise_sets", condition, function(res) {
       cb(res);
     });
   }
 };
 
 // Export the database functions for the controller (catsController.js).
-module.exports = fittraker;
+module.exports = fitplan_day_exercise_set;
