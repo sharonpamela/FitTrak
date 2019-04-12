@@ -9,6 +9,25 @@ a {
     color: white;
 }
 
+a:hover {
+    background: gray;
+    color: black;
+    transition: all 0.5s ease-in;
+}
+.login {
+    grid-column: 7;
+    grid-row: 1;
+    align-self: center;
+}
+
+.footer-menu {
+    grid-column: 1 / 9;
+    grid-row: 5;
+    align-self: center;
+    justify-self: center;
+    
+}
+
 .wrapper {
     display: grid;
     grid-template-columns: repeat(8, 1fr);

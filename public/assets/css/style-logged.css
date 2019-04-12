@@ -12,6 +12,12 @@ a {
     color: white;
 }
 
+a:hover {
+    background: gray;
+    color: black;
+    transition: all 0.5s ease-in;
+}
+
 .wrapper {
     display: grid;
     grid-template-columns: repeat(8, 1fr);

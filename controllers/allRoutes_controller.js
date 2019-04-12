@@ -167,7 +167,12 @@ router.put("/train/fitplanDayCompleted/:id", function (req, res) {
 });
 
 router.get("/train/empty", function (req, res) {
-    res.render("trainEmpty");
+
+    let hbsObject = {
+        title: 'Need workout',
+        style: 'style-train.css'
+    };
+    res.render("trainEmpty", hbsObject);
 });
 
 router.delete("/train/delSets/:id", function (req, res) {
@@ -190,10 +195,20 @@ router.get("/discover", function (req, res) {
         style: 'style-train.css'
     };
     console.log(hbsObject);
-    res.render("discover", hbsObject); //hbsObject is an obj containing one key "burger" which contains a list of objects
+    res.render("discover", hbsObject);
 
 });
 
+router.get("/calendar", function (req, res) {
+
+    let hbsObject = {
+        title: 'Calendar',
+        style: 'style-train.css'
+    };
+    console.log(hbsObject);
+    res.render("calendar", hbsObject);
+
+});
 
 router.post("/train/addSets/", function (req, res) {
     sets.insertOne(
