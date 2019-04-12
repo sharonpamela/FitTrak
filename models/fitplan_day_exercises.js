@@ -7,6 +7,17 @@ let fitplan_day_exercise = {
       cb(res);
     });
   },
+  getExercisesAndSets: function(firstTable, secondTable, cols4, joinCol, condition4){
+    return new Promise (async function (resolve, reject){
+      try{
+        const res = await orm.getExercisesAndSets(firstTable, secondTable, cols4, joinCol, condition4)
+        resolve(res);
+      } catch (e){
+        reject(e);
+      }
+    })
+  },
+
   // The variables cols and vals are arrays.
   insertOne: function(cols, vals, cb) {
     orm.insertOne("fitplan_day_exercises", cols, vals, function(res) {

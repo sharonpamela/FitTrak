@@ -40,52 +40,82 @@ function objToSql(ob) {
 
 // Object for all our SQL statement functions.
 var orm = {
-  selectAll: function(tableInput, cb) {
+  selectAll: function (tableInput, cb) {
     var queryString = "SELECT * FROM " + tableInput + ";";
-    connection.query(queryString, function(err, result) {
+    connection.query(queryString, function (err, result) {
       if (err) {
         throw err;
       }
       cb(result);
     });
   },
-  selectColumns: function(table, cols, condition, cb) {
-
-    var queryString = "SELECT " + cols.toString(); 
-    queryString += " FROM " + table;
-    queryString += " WHERE " ;
-    queryString += condition;
-
-    console.log(queryString);
-    connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
+  selectColumns: function (table, cols, condition) {
+    return new Promise(async function (resolve, reject) {
+      var queryString = "SELECT " + cols.toString();
+      queryString += " FROM " + table;
+      queryString += " WHERE ";
+      queryString += condition;
+      try {
+        const result = await connection.promise().query(queryString);
+        resolve(result[0]);
+      } catch (e) {
+        reject(e);
       }
-      cb(result);
+    });
+  },
+  selectFirstInstance: function (table, cols, condition, orderBy) {
+    return new Promise(async function (resolve, reject) {
+      var queryString = "SELECT " + cols.toString();
+      queryString += " FROM " + table;
+      queryString += " WHERE ";
+      queryString += condition;
+      queryString += " ORDER BY ";
+      queryString += orderBy
+      queryString += " LIMIT 1";
+
+      try {
+        const result = await connection.promise().query(queryString);
+        resolve(result[0]);
+      } catch (e) {
+          reject(e);
+      }
     });
   },
 
-  selectFirstInstance:function(table, cols, condition, orderBy, cb) {
+  getExercisesAndSets: function (firstTable, secondTable, cols4, joinCol, condition4) {
+    return new Promise(async function (resolve, reject) {
 
-    var queryString = "SELECT " + cols.toString(); 
-    queryString += " FROM " + table;
-    queryString += " WHERE " ;
-    queryString += condition;
-    queryString += " ORDER BY ";
-    queryString += orderBy
-    queryString += " LIMIT 1";
+      var queryString1 = "SELECT distinct exercise_name, exercise_sequence";
+      queryString1 += " FROM " + firstTable + " a ";
+      queryString1 += " LEFT JOIN ";
+      queryString1 += secondTable + " b ";
+      queryString1 += " ON ";
+      queryString1 += "b." + joinCol + "= a." + joinCol;
+      queryString1 += " WHERE ";
+      queryString1 += condition4;
 
-    console.log(queryString);
-    connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
+      var queryString2 = "SELECT " + cols4.toString();
+      queryString2 += " FROM " + firstTable + " a ";
+      queryString2 += " LEFT JOIN ";
+      queryString2 += secondTable + " b ";
+      queryString2 += " ON ";
+      queryString2 += "b." + joinCol + "= a." + joinCol;
+      queryString2 += " WHERE ";
+      queryString2 += condition4;
+
+      try {
+        var exer = await connection.promise().query(queryString1); // exer: [ [Array], [Array] ]
+        var sets = await connection.promise().query(queryString2); // sets: [ [Array], [Array] ]
+   
+        let response = [{exer:exer[0], sets:sets[0]}];
+        resolve(response);
+      } catch (e) {
+          reject(e);
       }
-      cb(result);
-    });
+    })
   },
 
-
-  insertOne: function(table, cols, vals, cb) {
+  insertOne: function (table, cols, vals, cb) {
     var queryString = "INSERT INTO " + table;
 
     queryString += " (";
@@ -97,7 +127,7 @@ var orm = {
 
     console.log(queryString);
 
-    connection.query(queryString, vals, function(err, result) {
+    connection.query(queryString, vals, function (err, result) {
       if (err) {
         throw err;
       }
@@ -105,7 +135,7 @@ var orm = {
     });
   },
   // An example of objColVals would be {burger_name: cheeseybob, devoured: 0}
-  updateOne: function(table, objColVals, condition, cb) {
+  updateOne: function (table, objColVals, condition, cb) {
     var queryString = "UPDATE " + table;
 
     queryString += " SET ";
@@ -114,19 +144,19 @@ var orm = {
     queryString += condition;
 
     console.log(queryString);
-    connection.query(queryString, function(err, result) {
+    connection.query(queryString, function (err, result) {
       if (err) {
         throw err;
       }
       cb(result);
     });
   },
-  deleteOne: function(table, condition, cb) {
+  deleteOne: function (table, condition, cb) {
     var queryString = "DELETE FROM " + table;
     queryString += " WHERE ";
     queryString += condition;
 
-    connection.query(queryString, function(err, result) {
+    connection.query(queryString, function (err, result) {
       if (err) {
         throw err;
       }
@@ -138,3 +168,39 @@ var orm = {
 
 // Export the orm object for the model (cat.js).
 module.exports = orm;
+
+
+// async old ways of doing this:
+  // selectFirstInstance:function(table, cols, condition, orderBy, cb) {
+
+  //   var queryString = "SELECT " + cols.toString(); 
+  //   queryString += " FROM " + table;
+  //   queryString += " WHERE " ;
+  //   queryString += condition;
+  //   queryString += " ORDER BY ";
+  //   queryString += orderBy
+  //   queryString += " LIMIT 1";
+
+  //   console.log(queryString);
+  //   connection.query(queryString, function(err, result) {
+  //     if (err) {
+  //       throw err;
+  //     }
+  //     cb(result);
+  //   });
+  // },
+    // selectColumns: function(table, cols, condition, cb) {
+
+  //   var queryString = "SELECT " + cols.toString(); 
+  //   queryString += " FROM " + table;
+  //   queryString += " WHERE " ;
+  //   queryString += condition;
+
+  //   console.log(queryString);
+  //   connection.query(queryString, function(err, result) {
+  //     if (err) {
+  //       throw err;
+  //     }
+  //     cb(result);
+  //   });
+  // },

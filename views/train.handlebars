@@ -9,65 +9,42 @@
     </div>
 
     <div class="title">
-        <h1 class="fitplan-name">Current Program: {{data.[0].fitplan_name}} </h1>
-        <h2 class="fitplan-day"> Day 1 - Body Weight Slay</h2>
+        <h1 class="fitplan-name">Current Program: {{fitplan_name.[0].fitplan_name}} </h1>
+        <h2 class="fitplan-day"> Day {{curr_day.[0].day_number}} - {{curr_day.[0].day_name}}</h2>
         <br>
-        <h4 class="info-num-exer">Total exercises: 2</h4>
-        <h4 class="info-time">Completion time in mins: 30</h4>
-        <h4 class="info-equipment">Gym equipment needed: NO</h4>
-
+        <h4 class="info-num-exer">Total exercises: {{fitplan_info.[0].info_num_exer}}</h4>
+        <h4 class="info-time">Completion time in mins: {{fitplan_info.[0].info_time}}</h4>
+        <h4 class="info-equipment">Gym equipment needed: {{fitplan_info.[0].info_equipment}}</h4>
     </div>
 
     <div class="exerciseDiv">
         <div>
-            <h3>Exercise 1: Push Ups</h3>
-            <form class="set">
-                <label>Set 1:</label>
-                10 reps
-                <input class="removeButton" data-id="11" type="submit" value=" Edit ">
-                <input class="removeButton" data-id="11" type="submit" value=" Remove "><br>
-                <label>Set 2:</label>
-                10 reps
-                <input class="removeButton" data-id="12" type="submit" value=" Edit ">
-                <input class="removeButton" data-id="12" type="submit" value=" Remove "><br>
-                <label>Set 3:</label>
-                10 reps
-                <input class="removeButton" data-id="13" type="submit" value=" Edit ">
-                <input class="removeButton" data-id="13" type="submit" value=" Remove "><br>
-            </form>
-            <input class="whiteTransButton" data-id="1" type="submit" value=" Add Set "><br>
+            {{#each completed_exer_entries}}
+            <h3>Exercise {{exer_seq}}: {{exer_name}}</h3>
+                {{#each sets_list}}
+                    <div  data-id={{set_id}}>
+                        <form class="set">
+                            <label>Set {{set_seq}}:</label>
+                            {{rep_num}} reps
+                            <button class="removeButton edit" data-id={{set_id}} type="button" value="Edit">Edit</button>
+                            <button class="removeButton remove" data-id={{set_id}} type="button" value="Remove">Remove</button><br>
+                        </form>
+                    </div>
+                {{/each}}
+                <div class="appendSetDiv" data-id={{exer_seq}}></div>
+                <button class="whiteTransButton add-set" type="button" value={{exer_seq}}>Add Set</button><br>
+                <br>
+            {{/each}}
+            <br>
         </div>
-        <br>
-        <div>
-            <h3>Exercise 2: Squats</h3>
-            <form class="set">
-                <label>Set 1:</label>
-                15 reps
-                <input class="removeButton" data-id="21" type="submit" value=" Edit ">
-                <input class="removeButton" data-id="21" type="submit" value=" Remove "><br>
-                <label>Set 2:</label>
-                15 reps
-                <input class="removeButton" data-id="22" type="submit" value=" Edit ">
-                <input class="removeButton" data-id="22" type="submit" value=" Remove "><br>
-                <label>Set 3:</label>
-                15 reps
-                <input class="removeButton" data-id="23" type="submit" value=" Edit ">
-                <input class="removeButton" data-id="23" type="submit" value=" Remove "><br>
-                <label>Set 4:</label>
-                15 reps
-                <input class="removeButton" data-id="24" type="submit" value=" Edit ">
-                <input class="removeButton" data-id="24" type="submit" value=" Remove "><br>
-            </form>
-            <input class="whiteTransButton" data-id="2" type="submit" value=" Add Set "><br>
+
+        <div class="optionButtons">
+            <span><button class="whiteTransButton startStop-button" type="button" data-workingout=false value="Start workout">Start workout</button>
+                &nbsp;</span>
+            <span><button class="whiteTransButton exit-button" type="button" data-workingout=false value="Exit">Exit</button></span>
         </div>
-        <br>
-    </div>
-    
-    <div class="optionButtons">
-        <span><input class="whiteTransButton startStop-button" type="submit" data-workingout=false
-                value="Start workout">
-            &nbsp;</span>
-        <span><input class="whiteTransButton exit-button" type="submit" data-workingout=false value="Exit"></span>
     </div>
 
-</div>
+  
+
+

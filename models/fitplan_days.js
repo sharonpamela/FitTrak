@@ -8,10 +8,20 @@ let fitplan_day = {
     });
   },
 
-  selectFirstInstance: function(table, cols, condition, orderBy, cb) {
-    orm.selectFirstInstance(table, cols, condition, orderBy, function(res) {
-      cb(res);
-    });
+  // selectFirstInstance: function(table, cols, condition, orderBy, cb) {
+  //   orm.selectFirstInstance(table, cols, condition, orderBy, function(res) {
+  //     cb(res);
+  //   });
+  // },
+  selectFirstInstance: function(table, cols, condition, orderBy) {
+    return new Promise (async function (resolve, reject){
+      try{
+        const res = await orm.selectFirstInstance(table, cols, condition, orderBy)
+        resolve(res);
+      } catch (e){
+        reject(e);
+      }
+    })
   },
 
   // The variables cols and vals are arrays.

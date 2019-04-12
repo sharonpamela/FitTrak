@@ -1,7 +1,7 @@
 // Import the ORM to create functions that will interact with the database.
 let orm = require("../config/orm.js");
 
-let fitplan_day_exercise_set = {
+let set = {
   selectAll: function(cb) {
     orm.selectAll("fitplan_day_exercise_sets", function(res) {
       cb(res);
@@ -18,7 +18,7 @@ let fitplan_day_exercise_set = {
       cb(res);
     });
   },
-  deleteOne: function(condition, cb) {
+  deleteSet: function(condition, cb) {
     orm.deleteOne("fitplan_day_exercise_sets", condition, function(res) {
       cb(res);
     });
@@ -26,4 +26,4 @@ let fitplan_day_exercise_set = {
 };
 
 // Export the database functions for the controller (catsController.js).
-module.exports = fitplan_day_exercise_set;
+module.exports = set;

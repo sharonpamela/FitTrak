@@ -7,9 +7,19 @@ let fitplan = {
       cb(res);
     });
   },
-  selectColumns: function(table, cols, condition, cb) {
-    orm.selectColumns(table, cols, condition, function(res) {
-      cb(res);
+  // selectColumns: function(table, cols, condition, cb) {
+  //   orm.selectColumns(table, cols, condition, function(res) {
+  //     cb(res);
+  //   });
+  // },
+  selectColumns: function(table, cols, condition) {
+    return new Promise(async function(resolve, reject){
+      try {
+        const res = await orm.selectColumns(table, cols, condition);
+        resolve(res);
+      } catch(e){
+        reject(e)
+      }
     });
   },
   // The variables cols and vals are arrays.
