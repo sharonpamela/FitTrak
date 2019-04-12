@@ -30,6 +30,7 @@ let fitplan = {
   },
   updateOne: function(objColVals, condition, cb) {
     orm.updateOne("fitplans", objColVals, condition, function(res) {
+      console.log(objColVals);
       cb(res);
     });
   },

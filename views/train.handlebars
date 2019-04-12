@@ -1,11 +1,11 @@
 <!-- Creates the Overall Grid -->
 <div class="wrapper">
     <div class="logo">
-        <h1> FitTraker </h1>
+        <h1><a href="/">FitTraker</a></h1>
     </div>
 
     <div class="logout">
-        <a href="#">Log out</a>
+        <a href="/">Log out</a>
     </div>
 
     <div class="title">
@@ -22,26 +22,26 @@
             {{#each completed_exer_entries}}
             <h3>Exercise {{exer_seq}}: {{exer_name}}</h3>
                 {{#each sets_list}}
-                    <div  data-id={{set_id}}>
+                    <div class = setDiv{{set_id}}>
                         <form class="set">
                             <label>Set {{set_seq}}:</label>
                             {{rep_num}} reps
-                            <button class="removeButton edit" data-id={{set_id}} type="button" value="Edit">Edit</button>
-                            <button class="removeButton remove" data-id={{set_id}} type="button" value="Remove">Remove</button><br>
+                            <button color="gray" disabled='disabled' class="removeButton edit enableOnStart" data-id={{set_id}} type="button" value="Edit" >Edit</button>
+                            <button color="gray" disabled='disabled' class="removeButton remove enableOnStart" data-id={{set_id}} type="button" value="Remove">Remove</button><br>
                         </form>
                     </div>
                 {{/each}}
-                <div class="appendSetDiv" data-id={{exer_seq}}></div>
-                <button class="whiteTransButton add-set" type="button" value={{exer_seq}}>Add Set</button><br>
+                <div class="appendSetDiv" id=appendSetDiv{{exer_seq}}></div>
+                <button disabled='disabled' class="whiteTransButton add-set enableOnStart" type="button" data-id={{exer_seq}} value={{exer_seq}}>Add Set</button><br>
                 <br>
             {{/each}}
             <br>
         </div>
 
         <div class="optionButtons">
-            <span><button class="whiteTransButton startStop-button" type="button" data-workingout=false value="Start workout">Start workout</button>
+            <span><button class="whiteTransButton startStop-button" data-state="stopped" type="button" data-workingout=false value="Start workout">Start workout</button>
                 &nbsp;</span>
-            <span><button class="whiteTransButton exit-button" type="button" data-workingout=false value="Exit">Exit</button></span>
+            <a href="/"><button class="whiteTransButton exit-button" type="button" data-workingout=false value="Exit">Exit</button></a>
         </div>
     </div>
 

@@ -42,6 +42,7 @@ a {
     font-size: 16px;
     margin: auto;
     max-width: 200px;
+    line-height: 1.2;
 }
 
 .formContainer>input {
@@ -78,11 +79,10 @@ input[type=text], input[type=password] {
 }
 
 .whiteTransButton {
-    background-color: gray;
+    background-color: transparent;
     color: white;
     font-size: 16px;
     border: 1px solid white;
-    /* border-radius: 8px; */
     cursor: pointer;
     width: 100%;
     max-width: 200px;
@@ -94,6 +94,7 @@ input[type=text], input[type=password] {
     text-decoration: none;
     letter-spacing: 1px;
     transition: all 0.3s ease-out;
+    line-height: 1.2;
 }
 
 .whiteTransButton:hover, .whiteTransButton:focus, .whiteTransButton:active {

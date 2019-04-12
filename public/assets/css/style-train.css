@@ -101,11 +101,12 @@ a {
 }
 
 
-.whiteTransButton:hover, .whiteTransButton:focus, .whiteTransButton:active {
+.whiteTransButton:hover {
     background: #fff;
     color: #000;
     transition: all 0.5s ease-in;
 }
+
 
 .removeButton {
     background-color: transparent;
@@ -119,12 +120,24 @@ a {
     transition: all 0.3s ease-out;
 }
 
-.removeButton:hover, .removeButton:focus, .removeButton:active {
+.removeButton:hover {
     background: #fff;
     color: #000;
     transition: all 0.5s ease-in;
 }
 
+
+.enableOnStart {
+    color: gray;
+    border-color: gray;
+}
+
+/* button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+} */
 .tone-it-up {
     grid-column: 2 / 8;
     grid-row: 3 / 5;

@@ -7,12 +7,6 @@ let fitplan_day = {
       cb(res);
     });
   },
-
-  // selectFirstInstance: function(table, cols, condition, orderBy, cb) {
-  //   orm.selectFirstInstance(table, cols, condition, orderBy, function(res) {
-  //     cb(res);
-  //   });
-  // },
   selectFirstInstance: function(table, cols, condition, orderBy) {
     return new Promise (async function (resolve, reject){
       try{
